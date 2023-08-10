@@ -1,13 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import { RootState } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { setCategory } from '../redux/category';
 
 function Header() {
   const dispatch = useDispatch();
-  const { category } = useSelector(state => ({
-    category: state.category.category,
-  }));
+  const { category } = useSelector((state: RootState) => state.category);
 
   return (
     <HeaderWrap>
@@ -80,7 +78,7 @@ const NavList = styled.ul`
   align-items: center;
   justify-content: center;
 `;
-const NavItem = styled.li`
+const NavItem = styled.li<{ active: boolean }>`
   span {
     padding: 0 2rem;
     font-size: 1.5em;

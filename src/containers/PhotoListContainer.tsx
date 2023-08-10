@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react';
+import { AppDispatch, RootState } from '@/redux/store'; // AppDispatch를 추가
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PhotoList from '../components/PhotoList';
+import { PhotoList } from '../components/PhotoList';
 import { fetchPhotos } from '../redux/photos';
 
 function PhotoListContainer() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>(); // AppDispatch를 사용한 dispatch 설정
 
   useEffect(() => {
     dispatch(fetchPhotos());
   }, [dispatch]);
 
-  const { photos, loading } = useSelector(state => ({
+  const { photos, loading } = useSelector((state: RootState) => ({
     photos:
       state.category.category === 'all'
         ? state.photos.data
-        : state.photos.data.filter(
-            photo => photo.category === state.category.category
-          ),
+        : state.photos.data.filter(photo => photo.category === state.category.category),
     loading: state.photos.loading,
   }));
 

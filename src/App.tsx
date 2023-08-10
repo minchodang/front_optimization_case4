@@ -1,9 +1,8 @@
-import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
 import axios from 'axios';
+import styled, { createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
-import PhotoListContainer from './containers/PhotoListContainer';
 import ImageModalContainer from './containers/ImageModalContainer';
+import PhotoListContainer from './containers/PhotoListContainer';
 
 axios.defaults.baseURL = 'http://localhost:3001';
 

@@ -1,8 +1,12 @@
-import React from 'react';
-import PhotoItem from './PhotoItem';
+import { PhotoType } from '@/redux/photos';
 import styled from 'styled-components';
+import PhotoItem from './PhotoItem';
 
-function PhotoList({ photos }) {
+interface PhotoListProps {
+  photos: PhotoType[];
+}
+
+export const PhotoList = ({ photos }: PhotoListProps) => {
   return (
     <PhotoListWrap>
       {photos.map((photo, i) => {
@@ -10,7 +14,7 @@ function PhotoList({ photos }) {
       })}
     </PhotoListWrap>
   );
-}
+};
 
 const PhotoListWrap = styled.div`
   margin: 20px auto;
@@ -19,5 +23,3 @@ const PhotoListWrap = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 `;
-
-export default PhotoList;

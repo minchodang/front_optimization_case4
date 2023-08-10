@@ -1,9 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import { PhotoType } from '@/redux/photos';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { showModal } from '../redux/imageModal';
 
-function PhotoItem({ photo: { urls, alt } }) {
+interface Props {
+  photo: PhotoType;
+}
+
+function PhotoItem({ photo: { urls, alt } }: Props) {
   const dispatch = useDispatch();
 
   const openModal = () => {
