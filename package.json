@@ -47,8 +47,10 @@
     ]
   },
   "devDependencies": {
+    "@types/react-lazyload": "^3.2.0",
     "json-server": "^0.16.3",
     "prettier": "^3.0.1",
+    "react-lazyload": "^3.2.0",
     "redux-devtools-extension": "^2.13.9"
   }
 }

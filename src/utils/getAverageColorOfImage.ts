@@ -1,6 +1,12 @@
-export function getAverageColorOfImage(imgElement) {
+export const getAverageColorOfImage = (
+  imgElement: HTMLImageElement
+): {
+  r: number;
+  g: number;
+  b: number;
+} => {
   const canvas = document.createElement('canvas');
-  const context = canvas.getContext && canvas.getContext('2d');
+  const context = canvas.getContext('2d');
   const averageColor = {
     r: 0,
     g: 0,
@@ -28,9 +34,9 @@ export function getAverageColorOfImage(imgElement) {
   }
 
   const count = length / 4;
-  averageColor.r = ~~(averageColor.r / count); // ~~ => convert to int
-  averageColor.g = ~~(averageColor.g / count);
-  averageColor.b = ~~(averageColor.b / count);
+  averageColor.r = Math.floor(averageColor.r / count); // Math.floor를 사용하여 반올림
+  averageColor.g = Math.floor(averageColor.g / count);
+  averageColor.b = Math.floor(averageColor.b / count);
 
   return averageColor;
-}
+};
