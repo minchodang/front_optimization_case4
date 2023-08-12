@@ -1,8 +1,7 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { ImageModalState, hideModal, setBgColor } from '../redux/imageModal';
-import { getAverageColorOfImage } from '../utils/getAverageColorOfImage';
+import { ImageModalState, hideModal } from '../redux/imageModal';
 import Modal from './Modal';
 
 function ImageModal({ modalVisible, src, alt, bgColor }: ImageModalState): ReactElement {
@@ -11,22 +10,11 @@ function ImageModal({ modalVisible, src, alt, bgColor }: ImageModalState): React
   const closeModal = () => {
     dispatch(hideModal());
   };
-  const onLoadImage = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    const averageColor = getAverageColorOfImage(target);
-    dispatch(
-      setBgColor({
-        r: averageColor.r,
-        g: averageColor.g,
-        b: averageColor.b,
-      })
-    );
-  };
 
   return (
     <Modal modalVisible={modalVisible} closeModal={closeModal} bgColor={bgColor}>
       <ImageWrap>
-        <FullImage crossOrigin="anonymous" src={src} alt={alt} onLoad={onLoadImage} />
+        <FullImage crossOrigin="anonymous" src={src} alt={alt} />
       </ImageWrap>
     </Modal>
   );
