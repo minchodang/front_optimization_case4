@@ -1,17 +1,22 @@
-export const getAverageColorOfImage = (
-  imgElement: HTMLImageElement
-): {
+type AverageColor = {
   r: number;
   g: number;
   b: number;
-} => {
+};
+
+const cache: { [key: string]: AverageColor } = {};
+
+export const getAverageColorOfImage = (imgElement: HTMLImageElement): AverageColor => {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
-  const averageColor = {
+  const averageColor: AverageColor = {
     r: 0,
     g: 0,
     b: 0,
   };
+  if (cache.hasOwnProperty(imgElement.src)) {
+    return cache[imgElement.src];
+  }
 
   if (!context) {
     return averageColor;
@@ -34,9 +39,9 @@ export const getAverageColorOfImage = (
   }
 
   const count = length / 4;
-  averageColor.r = Math.floor(averageColor.r / count); // Math.floor를 사용하여 반올림
+  averageColor.r = Math.floor(averageColor.r / count);
   averageColor.g = Math.floor(averageColor.g / count);
   averageColor.b = Math.floor(averageColor.b / count);
-
+  cache[imgElement.src] = averageColor;
   return averageColor;
 };

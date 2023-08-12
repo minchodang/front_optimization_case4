@@ -2,7 +2,8 @@ import { PhotoType } from '@/redux/photos';
 import LazyLoad from 'react-lazyload';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { showModal } from '../redux/imageModal';
+import { setBgColor, showModal } from '../redux/imageModal';
+import { getAverageColorOfImage } from '../utils/getAverageColorOfImage';
 
 interface Props {
   photo: PhotoType;
@@ -11,14 +12,21 @@ interface Props {
 function PhotoItem({ photo: { urls, alt } }: Props) {
   const dispatch = useDispatch();
 
-  const openModal = () => {
+  const openModal = (e: React.MouseEvent<HTMLImageElement>) => {
     dispatch(showModal({ src: urls.full, alt }));
+    const averageColor = getAverageColorOfImage(e.target as HTMLImageElement); // Optional
+    dispatch(setBgColor(averageColor));
   };
 
   return (
     <ImageWrap>
       <LazyLoad offset={1000}>
-        <Image src={urls.small + '&t=' + new Date().getTime()} alt={alt} onClick={openModal} />
+        <Image
+          crossOrigin="anonymous"
+          src={urls.small + '&t=' + new Date().getTime()}
+          alt={alt}
+          onClick={openModal}
+        />
       </LazyLoad>
     </ImageWrap>
   );
